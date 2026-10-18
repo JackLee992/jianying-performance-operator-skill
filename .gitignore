@@ -1,0 +1,12 @@
+*
+!/.gitignore
+!/README.md
+!/SKILL.md
+!/LICENSE
+!/agents/
+!/agents/openai.yaml
+!/references/
+!/references/migration-and-cache.md
+!/references/loudness.md
+!/references/diagnosis-and-evidence.md
+!/references/benchmark-and-patches.md

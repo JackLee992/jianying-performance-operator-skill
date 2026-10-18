@@ -1,0 +1,30 @@
+---
+name: jianying-performance-operator
+description: "Diagnose and operate the Jianying macOS project and background-task lifecycle: migration/import/opening, timeline loading/parsing, relinking and cache validation/recovery, compound/algorithm queues, loudness preparation and exports. Use measured evidence to preserve valid caches and choose practical recovery steps; treat binary patches as separate version-locked experiments."
+---
+
+# Jianying Performance Operator
+
+帮助用户完成剪映编辑和交付，先判断实际等待发生在哪条链上，再选最小可逆操作。读取当前应用版本、工程位置、媒体/缓存拓扑和最近进度；分别记录工程导入/打开到可编辑、后台准备到就绪、导出到完整文件的耗时；不要套用某台机器的耗时或认定所有“卡住”都是同一原因。
+
+## 首先保护可继续工作的状态
+
+- 工程迁移、导入、打开/加载/解析慢、恢复或素材缺失：先读 [migration-and-cache.md](references/migration-and-cache.md)。区分工程解析/迁移、素材权限与重链、缓存验证/后台任务，不只检查媒体导入。保存、快照、在原生界面重链并核对，再导出。确认工程中的 `Resources` 是物理目录还是指向其他工程的符号链接。
+- 长预合成或首次缓存：先读 [diagnosis-and-evidence.md](references/diagnosis-and-evidence.md)。保留有效缓存；查看真实输出的大小/mtime/完成文件和原生任务身份，不根据 CPU 空闲或进度百分比静止就终止。
+- 响度统一拖慢准备：读 [loudness.md](references/loudness.md)。先确定响度作用于原素材、单片段还是带混音效果的复合片段；选择是否改变声音语义由用户决定。
+- 用户要求补丁、并发实验或量化提速：读 [benchmark-and-patches.md](references/benchmark-and-patches.md)。只使用另存工程与独立应用副本；没有受控 A/B 就报告观察与未知。
+
+## 操作与恢复
+
+1. 使用可用的、已获授权的 UI 自动化工具，先查 AX/可访问性元素，再按当前界面操作。工具或元素不可用时报告边界并提供简短的人工下一步；不要硬编码历史坐标。常用英文 UI 标签可以附中文含义，以实际界面为准。
+2. 记录用户要保留的画面、声音和交付规格。先保存当前工程并核对快照/素材路径；需要退出时正常保存退出，重启后验证路径和缓存仍可用。不要每次重试都新建草稿、重复重链、复制整套媒体/缓存或触发缓存失效；先确认上轮保存与缓存可复用，避免重启后重复生成。
+3. 普通运行保持任务中心弹窗关闭：一次本地采样有 83% 主线程样本在列表刷新。这个操作减少已观察到的 UI 压力，不等于工程解析或渲染更快；当前没有首次打开/解析补丁提速基准，也不能假定所有卡顿都由它引起。需要查看时短暂打开，结束后关闭。
+4. 排队预合成期间避免来回切换响度、效果或其他高成本选项；变更会使依赖/缓存失效并重复工作。确需改变时先记录状态，在另存工程上一次确定设置，再运行。
+5. 导出面板卡住时，结合原生线程采样判断是否卡在目录枚举。先通过原生导出目录选择器选择可访问的本地目录，完成导出后复制到目标盘并核对。不要盲写全局 plist、修改 TCC 或假定依赖注入堆栈就是互斥锁死锁。
+6. 验收以交付物为准：确认原生任务结束、文件不再增长且可完整解码，核对时长/尺寸/音视频流及必要的画面抽查。区分自动解码、抽帧比对、人工看听。保存并复开工程；取消与恢复测试在单独测试工程上做。
+
+保持官方应用、原工程、原素材和有效缓存可恢复。不得自动清空原缓存、递归删除不明确归属的目录、沿符号链接“清理”、伪造算法完成、绕过缺失素材、修改全局安全策略，或无视用户选择改变编辑/音量语义。二进制补丁不作为普通排障的默认操作；应用副本可能共享偏好和工程目录。
+
+## 交付给用户
+
+说明“当前发生什么、已执行什么、交付物在哪、验证到什么、仍未知什么”。按需要分别报告静态研究、离线构建、运行 smoke、导出、取消恢复、同一工程冷缓存 A/B。对使用了既有缓存的导出明确标注，避免把它当首次缓存提速。任何重试应有可观察的前进指标和停止条件；反复同点失败时保留状态并补证据。

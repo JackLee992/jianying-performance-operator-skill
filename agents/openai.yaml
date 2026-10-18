@@ -1,0 +1,6 @@
+interface:
+  display_name: "Jianying Performance Operator"
+  short_description: "Recover Jianying projects and diagnose slow preparation"
+  default_prompt: "Use $jianying-performance-operator to diagnose this Jianying project and preserve useful media and caches while completing the export."
+policy:
+  allow_implicit_invocation: true
