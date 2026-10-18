@@ -9,9 +9,9 @@ description: "Diagnose and operate the Jianying macOS project and background-tas
 
 ## 首先保护可继续工作的状态
 
-- 工程迁移、导入、打开/加载/解析慢、恢复或素材缺失：先读 [migration-and-cache.md](references/migration-and-cache.md)。区分工程解析/迁移、素材权限与重链、缓存验证/后台任务，不只检查媒体导入。保存、快照、在原生界面重链并核对，再导出。确认工程中的 `Resources` 是物理目录还是指向其他工程的符号链接。
+- 工程迁移、导入、打开/加载/解析慢、恢复或素材缺失：先读 [migration-and-cache.md](references/migration-and-cache.md)。区分工程解析/迁移、素材权限与重链、缓存验证/后台任务，不只检查媒体导入。保存、快照、在原生界面重链并核对，再导出。确认工程中的 `Resources` 是物理目录还是指向其他工程的符号链接。反复丢链接时区分原始目录拷贝、“保留原有位置”与原生打包；核对原媒体、复合输出的外部引用；本机已验证原生“草稿参数 → 修改 → 导入素材 → 复制至草稿”能收集两条源 MOV。先重链/复制/保存复开，再做昂贵准备；用第二位置的原生导入验证迁移闭环，不能默认全部缺失或原生包依赖已修复。
 - 长预合成或首次缓存：先读 [diagnosis-and-evidence.md](references/diagnosis-and-evidence.md)。保留有效缓存；查看真实输出的大小/mtime/完成文件和原生任务身份，不根据 CPU 空闲或进度百分比静止就终止。
-- 响度统一拖慢准备：读 [loudness.md](references/loudness.md)。先确定响度作用于原素材、单片段还是带混音效果的复合片段；选择是否改变声音语义由用户决定。原生分离音频虽有快准备样本，但 OFF/OFF PCM 对照失败，不自动分离或作为默认等价替换。
+- 响度统一拖慢准备：读 [loudness.md](references/loudness.md)。先确定响度作用于原素材、单片段还是带混音效果的复合片段；批量操作只选有音频资格的片段，使用实际可见 Audio 勾选，不根据静态枚举推荐“只粘贴响度”；选择是否改变声音语义由用户决定。原生分离音频虽有快准备样本，但 OFF/OFF PCM 对照失败，不自动分离或作为默认等价替换。
 - 用户要求补丁、并发实验或量化提速：读 [benchmark-and-patches.md](references/benchmark-and-patches.md)。只使用另存工程与独立应用副本；没有受控 A/B 就报告观察与未知。
 
 ## 操作与恢复
