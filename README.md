@@ -6,7 +6,7 @@
 
 ## 安装
 
-需要已安装 Codex，并有 Git。仓库根目录就是 skill；Python 不是使用本 skill 的必要条件。克隆到持久目录，然后建立 Codex 可发现的符号链接：
+需要已安装 Codex，并有 Git。仓库根目录就是 skill；阅读和使用操作指导不要求 Python；可选的只读观测器需要 macOS 与 Python 3.9+。克隆到持久目录，然后建立 Codex 可发现的符号链接：
 
 ```bash
 skill_src="$HOME/.local/share/codex-skills/jianying-performance-operator"
@@ -31,6 +31,12 @@ keeps preparing compounds, preserve valid caches, and finish the export.
 ```
 
 Skill 默认允许自动发现。自身不会执行任何命令；操作由 Codex 根据用户授权和当前可用工具完成。修改工程、退出应用或导出前先保存并确认范围。UI 自动化优先使用可访问性元素，不依赖历史坐标。原版应用、原工程、源媒体和安全策略保持可恢复。
+
+## 可执行的只读观测器
+
+需要记录实际缓存生成量时，使用 [cache observer](references/cache-observer.md) 与 `scripts/observe_cache.py`。明确指定工程、选定应用和工程外的测量目录，按 color+alpha family、device/inode 和重命名记录文件变化；不读媒体内容、不修改应用/工程、不自动取消。生成日志留在本地，不上传原始输出。
+
+family 数不是全部/最少任务数，文件稳定不是原生完成，增长字节不是写盘吞吐或原生进度。使用方法、归属拒绝和九个临时文件系统测试见该 reference。
 
 ## 内容与证据
 

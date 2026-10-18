@@ -10,3 +10,8 @@
 !/references/loudness.md
 !/references/diagnosis-and-evidence.md
 !/references/benchmark-and-patches.md
+!/references/cache-observer.md
+!/scripts/
+!/scripts/observe_cache.py
+!/tests/
+!/tests/test_observe_cache.py
